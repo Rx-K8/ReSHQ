@@ -48,20 +48,3 @@ class SearchResults:
 
     def __str__(self):
         return "\n".join(str(result) for result in self.search_results)
-
-
-if __name__ == "__main__":
-    search_results = SearchResults()
-    search_results.add_search_result(
-        "query",
-        "doc_id",
-        "content",
-        1.0,
-    )
-    search_results.add_search_result(
-        "query",
-        "doc_id",
-        "content",
-        1.0,
-    )
-    print(search_results)
