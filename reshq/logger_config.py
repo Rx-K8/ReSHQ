@@ -1,5 +1,6 @@
 import loguru
-from aeug.paths import LOG_DIR
+
+from reshq.paths import LOG_DIR
 
 
 def setup_logger(name: str, level: str = "INFO"):
