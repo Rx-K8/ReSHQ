@@ -16,6 +16,10 @@ loguru = "^0.7.2"
 accelerate = "^1.1.1"
 bitsandbytes = "^0.44.1"
 
+[tool.poetry.group.dev.dependencies]
+isort = "^5.13.2"
+black = "^24.10.0"
+
 [tool.black]
 line-length = 79
 
