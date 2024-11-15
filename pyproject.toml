@@ -6,13 +6,15 @@ authors = ["Keito Fukuoka <keito.0o0.kirby@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = ">=3.10.0, <3.11"
 torch = {version = "2.4.1", source = "torch_cu121"}
 torchvision = {version = "0.19.1", source = "torch_cu121"}
 torchaudio = {version = "2.4.1", source = "torch_cu121"}
 pyserini = "^0.43.0"
 faiss-cpu = "^1.9.0"
 loguru = "^0.7.2"
+accelerate = "^1.1.1"
+bitsandbytes = "^0.44.1"
 
 
 [[tool.poetry.source]]
