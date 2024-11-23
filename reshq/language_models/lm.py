@@ -7,6 +7,39 @@ from reshq.output_parsers.base import BaseOutputParser
 
 
 class LanguageModel(BaseLanguageModel):
+    """
+    LanguageModel is a class for generating text using a pre-trained language model.
+
+    Args:
+        model_id (str): The identifier of the pre-trained model to use.
+        output_parser (Optional[BaseOutputParser]): An optional parser to process the model's output.
+        instruct (Optional[str]): An optional instruction to guide the model's generation.
+
+    Attributes:
+        generator (pipeline): The text generation pipeline from the transformers library.
+        output_parser (Optional[BaseOutputParser]): The parser to process the model's output.
+        instruct (Optional[dict[str, str]]): The instruction to guide the model's generation.
+
+    Methods:
+        generate(texts: list[str] | str) -> list[str]:
+            Generates text based on the input texts.
+
+        _create_prompts(texts: list[str]) -> list[list[dict[str, str]]]:
+            Creates prompts for the model based on the input texts.
+
+        _ensure_list(texts: list[str] | str) -> list[str]:
+            Ensures the input is a list of strings.
+
+        _parse_outputs(outputs: list[str]) -> list[str]:
+            Parses the model's outputs using the output parser.
+
+        _parse_last_assistant_output(output) -> list[str]:
+            Parses the last assistant output from the model's generated text.
+
+        _to_message(text: str) -> list[dict[str, str]]:
+            Converts a text string into a message format for the model.
+    """
+
     def __init__(
         self,
         model_id: str,
