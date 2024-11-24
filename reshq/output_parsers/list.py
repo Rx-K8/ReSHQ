@@ -1,6 +1,6 @@
 import re
 
-from base import BaseOutputParser
+from reshq.output_parsers.base import BaseOutputParser
 
 
 class NumberedListOutputParser(BaseOutputParser):

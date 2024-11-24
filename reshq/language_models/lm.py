@@ -45,18 +45,20 @@ class LanguageModel(BaseLanguageModel):
         model_id: str,
         output_parser: Optional[BaseOutputParser] = None,
         instruct: Optional[str] = None,
+        batch_size: int = 128,
     ):
-        self.generator = pipeline("text-generation", model=model_id)
+        self.generator = pipeline("text-generation", model=model_id, device_map="auto")
         self.output_parser = output_parser
         self.instruct: Optional[dict[str, str]] = (
             {"role": "assistant", "content": instruct} if instruct else None
         )
+        self.batch_size = batch_size
 
     def generate(self, texts: list[str] | str) -> list[str]:
         texts = self._ensure_list(texts)
 
         prompts = self._create_prompts(texts)
-        outputs_with_context = self.generator(prompts)
+        outputs_with_context = self.generator(prompts, batch_size=self.batch_size)
         outputs = list(
             map(self._parse_last_assistant_output, outputs_with_context)
         )

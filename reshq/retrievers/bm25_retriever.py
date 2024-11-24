@@ -3,9 +3,9 @@ from types import MappingProxyType
 
 from pyserini.search.lucene import LuceneSearcher
 
+from reshq.output_formats.search_result import SearchResults
 from reshq.result_converters.factory import converter_factory
 from reshq.retrievers.abc import Retriever
-from reshq.search_result import SearchResults
 
 bm25flat_index_mappings = MappingProxyType(
     {
@@ -51,12 +51,11 @@ class BM25(Retriever):
     def __init__(self, benchmark: str) -> None:
         self.name: str = "bm25"
         self.benchmark = benchmark
-        self.retriever = LuceneSearcher.from_prebuilt_index(
-            bm25flat_index_mappings[self.benchmark]
-        )
+        self.passage_type = bm25flat_index_mappings[self.benchmark]
+        self.retriever = LuceneSearcher.from_prebuilt_index(self.passage_type)
         self.converter = converter_factory(benchmark)
 
-    def retrieve(self, query: str, top_k: int):
+    def retrieve(self, query: str, top_k: int) -> SearchResults:
         hits = self.retriever.search(query, top_k)
         search_results = SearchResults()
         for hit in hits:
@@ -64,5 +63,4 @@ class BM25(Retriever):
             content = self.converter.convert(hit.lucene_document.get("raw"))
             score = hit.score
             search_results.add_search_result(query, doc_id, content, score)
-
         return search_results
