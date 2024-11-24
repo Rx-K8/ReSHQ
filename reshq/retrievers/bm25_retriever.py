@@ -1,4 +1,3 @@
-import json
 from types import MappingProxyType
 
 from pyserini.search.lucene import LuceneSearcher
