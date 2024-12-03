@@ -9,6 +9,7 @@ from reshq.retrievers.bm25_retriever import bm25flat_index_mappings
 
 splade_index_mappings = MappingProxyType(
     {
+        # BEIR
         "beir_climate_fever": "beir-v1.0.0-climate-fever.splade-pp-ed",
         # TREC
         "trec2019": "msmarco-v1-passage.splade-pp-ed",
