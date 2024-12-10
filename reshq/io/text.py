@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from logger_config import logger
+from reshq.logger_config import logger
 
 from reshq.io.abc import FileWriteHandler
 from reshq.io.utils import make_directory

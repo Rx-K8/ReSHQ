@@ -78,6 +78,7 @@ class ReSHQ(Retriever):
 
             outputs = self.generator.generate(prompts)
             for doc_id, output in zip(doc_ids, outputs):
+                logger.info(doc_id)
                 try:
                     self.query_cacher.add_queries(
                         doc_id, self._validate_queries(output)

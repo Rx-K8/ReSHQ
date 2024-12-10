@@ -45,7 +45,7 @@ class LanguageModel(BaseLanguageModel):
         model_id: str,
         output_parser: Optional[BaseOutputParser] = None,
         instruct: Optional[str] = None,
-        batch_size: int = 128,
+        batch_size: int = 8,
     ):
         self.generator = pipeline("text-generation", model=model_id, device_map="auto")
         self.output_parser = output_parser
@@ -56,6 +56,7 @@ class LanguageModel(BaseLanguageModel):
 
     def generate(self, texts: list[str] | str) -> list[str]:
         texts = self._ensure_list(texts)
+        texts = [self.clip_text(text) for text in texts]
 
         prompts = self._create_prompts(texts)
         outputs_with_context = self.generator(prompts, batch_size=self.batch_size)
@@ -66,6 +67,11 @@ class LanguageModel(BaseLanguageModel):
             outputs = self._parse_outputs(outputs)
 
         return outputs
+
+    def clip_text(self, text):
+        if len(text) > 7000:
+            text = text[:7000]
+        return text
 
     def _create_prompts(self, texts: list[str]) -> list[list[dict[str, str]]]:
         return list(map(self._to_message, texts))
