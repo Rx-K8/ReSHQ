@@ -1,9 +1,9 @@
 from types import MappingProxyType
 
-from pyserini.encode import AutoQueryEncoder, TctColBertQueryEncoder
+from pyserini.encode import AutoQueryEncoder
 from pyserini.search import get_qrels, get_topics
 from pyserini.search.faiss import FaissSearcher
-from pyserini.search.lucene import LuceneHnswDenseSearcher, LuceneSearcher
+from pyserini.search.lucene import LuceneSearcher
 from tqdm import tqdm
 
 from reshq.io.text import TextWriteHandler

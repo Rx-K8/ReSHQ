@@ -1,13 +1,10 @@
 import textwrap
 from typing import Optional
 
-from transformers.utils import doc
-
-from reshq.cachers.query_cacher import QueryCacher
-from reshq.encoders.contriever import Contriever
+from reshq.encoders.contriever import ContrieverEncoder
 from reshq.language_models.lm import LanguageModel
 from reshq.logger_config import logger
-from reshq.output_formats.search_result import SearchResult, SearchResults
+from reshq.output_formats.search_result import SearchResults
 from reshq.output_parsers.base import BaseOutputParser
 from reshq.output_parsers.list import NumberedListOutputParser
 from reshq.retrievers.abc import Retriever
@@ -39,7 +36,7 @@ class ReSHQ(Retriever):
         self.init_retriever = initial_retriever
         self.generator = LanguageModel(model_id, output_parser)
         self.query_cacher = query_cacher
-        self.contriever = Contriever()
+        self.contriever = ContrieverEncoder()
         self.created_queries_num = 5
 
     def retrieve(self, query: str, top_k: int):
