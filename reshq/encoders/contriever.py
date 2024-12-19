@@ -3,7 +3,7 @@ from transformers import AutoModel, AutoTokenizer
 from reshq.similarity import dot_product
 
 
-class Contriever:
+class ContrieverEncoder:
     def __init__(self):
         self.model_id = "facebook/contriever"
         self.tokenizer = AutoTokenizer.from_pretrained(self.model_id)

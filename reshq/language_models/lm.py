@@ -45,7 +45,7 @@ class LanguageModel(BaseLanguageModel):
         model_id: str,
         output_parser: Optional[BaseOutputParser] = None,
         instruct: Optional[str] = None,
-        batch_size: int = 8,
+        batch_size: int = 64,
     ):
         self.generator = pipeline("text-generation", model=model_id, device_map="auto")
         self.output_parser = output_parser
